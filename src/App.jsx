@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import './App.css'
 import Bottle from './Bottle';
-import { addToLS, getStoredCart } from '../utilities/localStorage';
+import { addToLS, getStoredCart, rmvLocal } from '../utilities/localStorage';
 import Cart from './Cart';
 
 
@@ -17,11 +17,19 @@ function App() {
     console.log(bottle)
     addToLS(bottle.id)
   }
+  // remove item
+  const rmvCart = id =>{
+    const remainingCart = cart.filter(idx=> idx.id !== id)
+    setToCart(remainingCart)
+    rmvLocal(id) ;
+  }
+  // 
   useEffect(()=>{
     fetch('bottles.json')
     .then(res=>res.json())
     .then(data=>setBottles(data))
   },[]);
+  // 
 
   // load cart from local
   useEffect(()=>{
@@ -51,10 +59,12 @@ function App() {
      <div>
      <h1>Water Bottles</h1>
      <h2>Total :{bottles.length}</h2>
-     <Cart cart={cart}></Cart>
+     <Cart cart={cart} rmvCart={rmvCart}></Cart>
      
      <ol>{
-      cart.map(item=> <li key={item.id}>{item.name}</li>) 
+      cart.map(item=> <div key={item.id}>
+         <li >{item.name} <button onClick={()=> rmvCart(item.id)}>-</button> </li>
+      </div>) 
      }</ol>
      
       <div className='container'>
