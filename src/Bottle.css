@@ -8,6 +8,8 @@ img{
     width: 200px;
 }
 .card{
-    border: 1px solid tomato;
-    border-radius: 10px;
+    /* border: 1px solid tomato; */
+    border-radius: 5px;
+    box-shadow: 1px 1px 5px 1px;
+    padding: 10px;
 }
