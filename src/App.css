@@ -40,3 +40,13 @@
 .read-the-docs {
   color: #888;
 }
+
+li{
+  font-weight:600;
+
+}
+ol{
+  /* Remove default margin */
+  padding: 0;
+  list-style-position: inside;
+}
